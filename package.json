@@ -1,0 +1,18 @@
+{
+  "name": "codeforcesapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Prasant Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cf-api-wrapper": "^1.0.2",
+    "express": "^4.17.3",
+    "https": "^1.0.0"
+  }
+}
