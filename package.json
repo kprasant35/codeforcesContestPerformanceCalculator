@@ -11,7 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
-    "cf-api-wrapper": "^1.0.2",
     "express": "^4.17.3",
     "https": "^1.0.0"
   }

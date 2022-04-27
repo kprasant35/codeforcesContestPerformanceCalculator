@@ -21,22 +21,27 @@ app.post("/",function(req,res){
             data+=chunk;
         });
         response.on("end",()=>{
-            var contests=JSON.parse(data).result;
-            var ans=`<table style="border: 1px solid black; border-collapse: collapse;"> <tr style="border: 1px solid black; border-collapse: collapse;"><th style="border: 1px solid black; border-collapse: collapse;">Contest Name</th><th style="border: 1px solid black; border-collapse: collapse;">Old Rating</th><th style="border: 1px solid black; border-collapse: collapse;">New Rating</th><th style="border: 1px solid black; border-collapse: collapse;">Rating Change</th><th style="border: 1px solid black; border-collapse: collapse;">Performance</th></tr>`;
-            
-            for(var i=contests.length-1;i>=0;i--){
-                var ratingChange=parseInt(contests[i].newRating)-parseInt(contests[i].oldRating);
-                var perf=contests[i].oldRating+4*ratingChange;
-                ans+=`<tr>
+            if(JSON.parse(data).status === "OK"){
+                var contests=JSON.parse(data).result;
+                var ans=`<table style="border: 1px solid black; border-collapse: collapse;"> <tr style="border: 1px solid black; border-collapse: collapse;"><th style="border: 1px solid black; border-collapse: collapse;">Contest Name</th><th style="border: 1px solid black; border-collapse: collapse;">Old Rating</th><th style="border: 1px solid black; border-collapse: collapse;">New Rating</th><th style="border: 1px solid black; border-collapse: collapse;">Rating Change</th><th style="border: 1px solid black; border-collapse: collapse;">Performance</th></tr>`;
                 
-                <td>${contests[i].contestName}</td>
-                <td>${contests[i].oldRating}</td>
-                <td>${contests[i].newRating}</td>
-                <td>${ratingChange}</td>
-                <td>${perf}</td>
-                </tr>`
+                for(var i=contests.length-1;i>=0;i--){
+                    var ratingChange=parseInt(contests[i].newRating)-parseInt(contests[i].oldRating);
+                    var perf=contests[i].oldRating+4*ratingChange;
+                    ans+=`<tr>
+                    
+                    <td>${contests[i].contestName}</td>
+                    <td>${contests[i].oldRating}</td>
+                    <td>${contests[i].newRating}</td>
+                    <td>${ratingChange}</td>
+                    <td>${perf}</td>
+                    </tr>`
+                }
+                ans+=`</table>`;
+            }else{
+                ans=`Invalid handle ╰（‵□′）╯`;
             }
-            ans+=`</table>`;
+            
           //  console.log(orgData);
             res.send(ans);
         });
